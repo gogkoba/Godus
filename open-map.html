@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автозагрузка карты в Fantasy Map Generator</title>
+    <script>
+        window.onload = function() {
+            const mapUrl = "https://raw.githubusercontent.com/gogkoba/Godus/refs/heads/main/%D0%93%D0%BE%D0%B4%D1%83%D1%81-2.map";
+            const fmUrl = "https://azgaar.github.io/Fantasy-Map-Generator/";
+
+            // Открываем Fantasy Map Generator в новой вкладке
+            const win = window.open(fmUrl, "_blank");
+
+            // Ожидаем загрузки и вставляем файл
+            setTimeout(() => {
+                if (win) {
+                    const inputFile = win.document.querySelector("#fileInput");
+                    if (inputFile) {
+                        inputFile.value = mapUrl;
+                        inputFile.dispatchEvent(new Event("change"));
+                    } else {
+                        alert("Не удалось найти элемент загрузки файла. Попробуйте вручную.");
+                    }
+                } else {
+                    alert("Разрешите всплывающие окна для работы автозагрузки.");
+                }
+            }, 5000); // Ждем 5 секунд
+        };
+    </script>
+</head>
+<body>
+    <h1>Открывается Fantasy Map Generator...</h1>
+</body>
+</html>
